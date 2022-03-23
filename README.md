@@ -76,3 +76,9 @@
 
     Basically everything in this commit is subject to change if we choose. We can even move away from Expo if we have a better alternative. Let's talk in
     the Discord if we wanna move in a different direction in some major way. 
+
+    ------------------
+    Clayton 3/22/2022:
+    ------------------
+
+    Just had to stop here for today. @ me on Discord if you're trying to work on this before I update again. 

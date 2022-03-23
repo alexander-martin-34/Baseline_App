@@ -1,8 +1,37 @@
-import React from 'react'; 
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack'; 
+import { createAppContainer } from 'react-navigation'; 
+
+import HomeScreen from './Home.js';
+import LogInScreen from './LogIn.js'; 
+import RegisterScreen from './Register.js'; 
+
+
+const AppNavigator = createStackNavigator({
+    Home: HomeScreen,
+    LogIn: LogInScreen, 
+    Register: RegisterScreen, 
+}, {
+    initialRouteName: 'Home',
+    headerMode: 'none', 
+});
+
+const App = createAppContainer(AppNavigator); 
+
+export default App; 
+
+/*
+import React, { Component } from 'react'; 
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native'; 
+import { createStackNavigator, createAppContainer } from '@react-navigation/native'; 
+import Login from "./LogIn"; 
 
-export default function App() {
 
+
+
+
+const HomeScreen = ({ navigation }) => {
     return (
         <ImageBackground
             source={require('./assets/speechPortrait.png')}
@@ -14,11 +43,15 @@ export default function App() {
                 >
                     BaseLine
                 </Text>
+
                 <TouchableOpacity
-                    // onPress={}
+                    onPress={() => {
+                        navigation.navigate(Login, { name: 'Login' } ); 
+                    }}
                 >
                     <Text style={styles.login}>Login</Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity
                     // onPress={}
                 >
@@ -27,48 +60,5 @@ export default function App() {
             </View>
         </ImageBackground>
     );
-}
-
-const styles = StyleSheet.create({
-    background: {
-        width: '100%',
-        height: '100%',
-    },
-    title: {
-        fontFamily: 'Optima', 
-        fontSize: 65, 
-        fontWeight: 'bold', 
-        textAlign: 'center', 
-        color: '#7851a9',
-        marginTop: '66%',
-        // backgroundColor: '#AE87D0',
-    },
-    login: {
-        fontFamily: 'Optima',
-        backgroundColor: '#1f262a',
-        color: '#3499ad',
-        width: '75%',
-        borderRadius: 10,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        marginLeft: '11%',
-        padding: '2%',
-        fontSize: 27,
-        marginTop: '50%',
-        overflow: 'hidden', 
-    },
-    signup: {
-        fontFamily: 'Optima',
-        backgroundColor: '#1f262a',
-        color: '#3499ad',
-        width: '75%',
-        borderRadius: 10,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        marginLeft: '11%',
-        padding: '2%',
-        fontSize: 27,
-        marginTop: '10%',
-        overflow: 'hidden', 
-    }
-});
+};
+*/
