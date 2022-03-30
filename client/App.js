@@ -6,12 +6,14 @@ import { createAppContainer } from 'react-navigation';
 import HomeScreen from './Home.js';
 import LogInScreen from './LogIn.js'; 
 import RegisterScreen from './Register.js'; 
+import UserPageScreen from './UserPage.js'; 
 
 
 const AppNavigator = createStackNavigator({
     Home: HomeScreen,
     LogIn: LogInScreen, 
     Register: RegisterScreen, 
+    UserPage: UserPageScreen, 
 }, {
     initialRouteName: 'Home',
     headerMode: 'none', 

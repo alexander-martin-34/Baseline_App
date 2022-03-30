@@ -4,6 +4,26 @@ import { createStackNavigator, createAppContainer } from "@react-navigation/nati
 
 export default class RegisterScreen extends Component {
 
+    state = {
+        username: "", 
+        password: "", 
+    }
+
+    handleUsername = (text) => {
+        this.setState({ username: text } ); 
+    }
+    handlePassword = (text) => {
+        this.setState({ password: text } ); 
+    }
+    login = (username, password) => {
+        if(username.length > 30 || username.length < 6 || password.length > 30 || password.length < 6){
+            alert("Error. Invalid password."); 
+            return; 
+        }
+
+        this.props.navigate('Home'); 
+    }
+
     render() {
         return (
             <View style = {styles.container}>
@@ -13,21 +33,29 @@ export default class RegisterScreen extends Component {
                         {"\n"}{"\n"}
                         Registration flavor text here.
                         {"\n"}{"\n"}
-                        Usernames and passwords can be between 6 and 15 characters long. 
+                        Usernames and passwords can be between 6 and 30 characters long. 
                     </Text>
                 </View>
                 <View style={styles.footer}>
                     <TextInput
                         style={styles.usernameInput}
-                        //onChangeText={}
+                        onChangeText={this.handleUsername}
                         placeholder="username"
                     />
                     <TextInput 
                         style={styles.passwordInput}
-                        //onChangeText={}
+                        onChangeText={this.handlePassword}
                         placeholder="password"
                         secureTextEntry="true"
                     />
+                    <TouchableOpacity
+                        style = {styles.submitButton}
+                        onPress={() => {
+                            this.login(this.state.username, this.state.password);   
+                        }}
+                    >
+                        <Text style = {styles.submitText}>Submit</Text>
+                    </TouchableOpacity>
                     {/* test what's saved in username and password */}
                     <Text>Username: {this.username} {"\n"}Password: {this.password}</Text>
                 </View>
@@ -81,5 +109,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginTop: '5%',
         textAlign: 'center', 
+    },
+    submitButton: {
+        height: '10%', 
+        width: '75%', 
+        top: 80,
+    },
+    submitText: {
+        fontFamily: 'Optima',
+        backgroundColor: 'green',
+        color: '#3499ad',
+        borderRadius: 10,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 35, 
+        overflow: 'hidden', 
     }
 })
