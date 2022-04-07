@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextInput } from 'react-native'; 
 import { createStackNavigator, createAppContainer } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 export default class RegisterScreen extends Component {
 
@@ -10,15 +11,66 @@ export default class RegisterScreen extends Component {
     }
 
     handleUsername = (text) => {
-        this.setState({ username: text } ); 
+        this.setState({ username: text }); 
     }
     handlePassword = (text) => {
-        this.setState({ password: text } ); 
+        this.setState({ password: text }); 
     }
-    // edit this function. Take in the username and password, and if the backend database does not already contain the username, add the username/password combo. 
+    // TO-DO: check backend database for username
+    // if username does not exist in database, 
+    // display an alert and return false
+    // if username does exist, call storeUser with username and password 
+    // and return true
+    // below is temp code for testing. You can edit the whole function. 
+    checkUsername = async (username) => {
+        try {
+            let answer = await AsyncStorage.getItem("username"); 
+            if(answer != null){
+                alert("Username already exists."); 
+                return false; 
+            }
+
+            this.storeUser(username, this.state.password); 
+            return true; 
+        }
+        catch(e){
+            console.log("Error while checking if username already exists."); 
+            console.log(e); 
+            return false; 
+        }
+    }
+    storeUser = async (username, password) => {
+        try {
+            // TO-DO: call backend function to save username/password into database
+            // if storing data in backend fails, return false
+            // if storing data in backend suceeds, then proceed
+
+
+
+            // keep all code below
+            await AsyncStorage.setItem("username", username);
+            await AsyncStorage.setItem("password", password); 
+
+            return true; 
+        }
+        catch(e) {
+            console.log("Error in storing user info to backend."); 
+            console.log(e); 
+            return false; 
+        }
+    }
     register = (username, password) => {
         if(username.length > 30 || username.length < 6 || password.length > 30 || password.length < 6){
             alert("Error. Invalid password."); 
+            return; 
+        }
+
+        let flag = this.checkUsername(username); 
+        if(flag == false){
+            return; 
+        }
+        flag = this.storeUser(username, password); 
+        if(flag == false){
             return; 
         }
 
@@ -47,7 +99,7 @@ export default class RegisterScreen extends Component {
                         style={styles.passwordInput}
                         onChangeText={this.handlePassword}
                         placeholder="password"
-                        secureTextEntry="true"
+                        secureTextEntry={true}
                     />
                     <TouchableOpacity
                         style = {styles.submitButton}

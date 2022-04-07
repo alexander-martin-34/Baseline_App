@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextInput } 
 import { createStackNavigator, createAppContainer } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
-
+// not finished with this yet. Needs cleaning up and testing still. 
 export default class LogInScreen extends Component {
 
     state = {
@@ -37,7 +37,6 @@ export default class LogInScreen extends Component {
         return true; 
 
     }
-    // edit this login function. Take username and password and see if the matching username in the backend has the correct password.
     login = (username, password) => {
         if(username.length > 30 || username.length < 6 || password.length > 30 || password.length < 6){
             alert("Error. Invalid password."); 
@@ -74,7 +73,7 @@ export default class LogInScreen extends Component {
                         style={styles.passwordInput}
                         onChangeText={this.handlePassword}
                         placeholder="password"
-                        secureTextEntry="true"
+                        secureTextEntry={true}
                     />
                     <TouchableOpacity
                         style = {styles.submitButton}

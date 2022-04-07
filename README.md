@@ -87,10 +87,13 @@
     Clayton 4/7/2022:
     ------------------
 
+    1)
     I see why working on the backend for the project was so confusing, that was my mistake. I forgot to commit the code I had worked on last week. 
     That must've made things look way more confusing than necessary, that was totally my bad. I'm committing the code I wrote and added some 
-    comments where you have to change something in the frontend. The rest of the frontend code should be fine. You should have to change the 
-    login function is LogIn.js and the register function is Register.js. The rest of your stuff should just be whatever backend implementation you 
-    choose to use. I left a comment there explaining more. I also fixed any small bugs that I was aware was occuring in the frontend, but if you find 
-    more bring them to my attention and I'll jump on it. Just a heads up, I'm going to work on this some more today, so there might be another commit
-    submitted tonight. 
+    comments where you have to change something in the frontend. I'll work on polishing the frontend up and outlining exactly what code we need to replace with 
+    backend calls. I'll try to have all of the frontend implementation for user login and registration completely done by tonight, but it'll take multiple 
+    breaks/commits. If you find any issues with the frontend, message me and I'll hop on it ASAP. 
+    2)
+    Ok, just finished up and tested Home.js and Register.js. You'll find comments in Register.js outlining what backend implementation needs to be done for 
+    the registration functionality. Going to try to complete login frontend by tonight but I need to take a break. You may want to wait until I finish that
+    before getting into it because it'll make testing easier. Regardless though, you should be good to start working on Registration.js whenever. 

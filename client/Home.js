@@ -1,9 +1,28 @@
 import React, { Component, useEffect } from 'react'; 
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, Dimensions } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 export default class HomeScreen extends Component {
+
+    // log user out everytime they're redirected to home page
+    // this will avoid any bugs that might occur if the app crashes
+    logOut = async () => {
+        try {
+            let loggedIn = await AsyncStorage.getItem("username"); 
+            if(loggedIn != null) {
+                await AsyncStorage.removeItem("username"); 
+                await AsyncStorage.removeItem("password"); 
+            }
+        }
+        catch(e) {
+            console.log("Error when trying to log out in home page."); 
+            console.log(e); 
+        }
+    }
     
     render() {
+        this.logOut();
+
         return (
             <ImageBackground
                 source={require('./assets/speechPortrait.png')}
@@ -39,8 +58,7 @@ export default class HomeScreen extends Component {
     }
 }
 
-// I don't understand how this styling works yet, this could be dramatically improved and anyone is welcome to have a try at it
-// I basically just adjusted values until it looked okay
+
 const styles = StyleSheet.create({
    page: {
        justifyContent: 'center', 
