@@ -82,3 +82,15 @@
     ------------------
 
     Just had to stop here for today. @ me on Discord if you're trying to work on this before I update again. 
+
+    ------------------
+    Clayton 4/7/2022:
+    ------------------
+
+    I see why working on the backend for the project was so confusing, that was my mistake. I forgot to commit the code I had worked on last week. 
+    That must've made things look way more confusing than necessary, that was totally my bad. I'm committing the code I wrote and added some 
+    comments where you have to change something in the frontend. The rest of the frontend code should be fine. You should have to change the 
+    login function is LogIn.js and the register function is Register.js. The rest of your stuff should just be whatever backend implementation you 
+    choose to use. I left a comment there explaining more. I also fixed any small bugs that I was aware was occuring in the frontend, but if you find 
+    more bring them to my attention and I'll jump on it. Just a heads up, I'm going to work on this some more today, so there might be another commit
+    submitted tonight. 

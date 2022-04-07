@@ -15,13 +15,14 @@ export default class RegisterScreen extends Component {
     handlePassword = (text) => {
         this.setState({ password: text } ); 
     }
-    login = (username, password) => {
+    // edit this function. Take in the username and password, and if the backend database does not already contain the username, add the username/password combo. 
+    register = (username, password) => {
         if(username.length > 30 || username.length < 6 || password.length > 30 || password.length < 6){
             alert("Error. Invalid password."); 
             return; 
         }
 
-        this.props.navigate('Home'); 
+        this.props.navigation.navigate('UserPage'); 
     }
 
     render() {
@@ -51,7 +52,7 @@ export default class RegisterScreen extends Component {
                     <TouchableOpacity
                         style = {styles.submitButton}
                         onPress={() => {
-                            this.login(this.state.username, this.state.password);   
+                            this.register(this.state.username, this.state.password);   
                         }}
                     >
                         <Text style = {styles.submitText}>Submit</Text>

@@ -37,6 +37,7 @@ export default class LogInScreen extends Component {
         return true; 
 
     }
+    // edit this login function. Take username and password and see if the matching username in the backend has the correct password.
     login = (username, password) => {
         if(username.length > 30 || username.length < 6 || password.length > 30 || password.length < 6){
             alert("Error. Invalid password."); 
