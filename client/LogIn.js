@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextInput } 
 import { createStackNavigator, createAppContainer } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
-// not finished with this yet. Needs cleaning up and testing still. 
 export default class LogInScreen extends Component {
 
     state = {
@@ -17,7 +16,7 @@ export default class LogInScreen extends Component {
     handlePassword = (text) => {
         this.setState({ password: text } ); 
     }
-    storeData = async (username, password) => {
+    storeData = async (username) => {
         try {
             await AsyncStorage.setItem('username', username);
         } catch (e) {
@@ -26,26 +25,27 @@ export default class LogInScreen extends Component {
             return false; 
         }
 
-        try {
-            await AsyncStorage.setItem('password', password); 
-        } catch (e) {
-            console.log("Error saving data locally.");
-            console.log(e); 
-            return false; 
-        }
-
         return true; 
 
     }
     login = (username, password) => {
+        // keep this code. We want to check any obvious reason the password would be invalid before querying the backend. 
+        // Don't want to make the user wait unnecessarily. 
         if(username.length > 30 || username.length < 6 || password.length > 30 || password.length < 6){
-            alert("Error. Invalid password."); 
+            alert("Error. Invalid username or password."); 
             return; 
         }
 
-        let success = this.storeData(username, password); 
+        // TO-DO: check backend database for user with matching username, confirm that inputted password matches user's password stored
+        // in the database. If it does not match, alert the user with an error and return out of this function. 
+        // If the password does match, continue on in this function. 
+
+
+
+        // Keep code below. This is for easy accesss to username. 
+        let success = this.storeData(username); 
         if (success === false){
-            alert("Error storing login information. Please try again."); 
+            alert("Error storing username while logging in. Please try again."); 
             return; 
         }
         this.props.navigation.navigate('UserPage'); 

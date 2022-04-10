@@ -17,9 +17,9 @@ export default class RegisterScreen extends Component {
         this.setState({ password: text }); 
     }
     // TO-DO: check backend database for username
-    // if username does not exist in database, 
+    // if username does exist in database, 
     // display an alert and return false
-    // if username does exist, call storeUser with username and password 
+    // if username doesn't exist, call storeUser with username and password 
     // and return true
     // below is temp code for testing. You can edit the whole function. 
     checkUsername = async (username) => {

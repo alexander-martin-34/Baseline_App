@@ -97,3 +97,13 @@
     Ok, just finished up and tested Home.js and Register.js. You'll find comments in Register.js outlining what backend implementation needs to be done for 
     the registration functionality. Going to try to complete login frontend by tonight but I need to take a break. You may want to wait until I finish that
     before getting into it because it'll make testing easier. Regardless though, you should be good to start working on Registration.js whenever. 
+
+    -----------------
+    Clayton 4/10/2022: 
+    -----------------
+
+    Cleaned up and tested LogIn.js. It all works as far as I can tell when saving and retrieving username locally in the frontend. Added a To-Do in that file 
+    where the backend needs to be called to check the database and see if the inputted and stored password matches. Left a comment in that file with more details.
+    Also worked on UserPage.js, figured out how to display the user's username on the page. Needed to figure that out because eventually we'll need to pull 
+    exercises from the backend and display them on-screen, but we're not quite ready for that back-end implementation yet. Will update the readme more when more 
+    commmits come. 
