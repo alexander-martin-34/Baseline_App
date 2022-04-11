@@ -113,3 +113,11 @@
     can't read typescript but it definitely is able to when the program is actually run. Idk if it will appear on all PCs but if you see it, don't be alarmed,
     it runs fine. I'm hoping I can send one more commit by the end of today, but this may be it for me. My next steps will be implementing audio playback on 
     user page and polishing up the aesthetics of all the current frontend pages. 
+
+    ------------------
+    4/11/2022
+    ------------------
+
+    Cleaned up the front end of all the pages and tried to make them as pretty and presentable as possible, but I'm not an artist in the slightest. 
+    Added a log out button on the user page. Added redirects on the log in and registration pages that links them to each other. 
+    Still working on playing back recorded audio on the user page. 

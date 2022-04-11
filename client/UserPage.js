@@ -1,7 +1,8 @@
 import React, { Component} from 'react'; 
-import { StyleSheet, Text, View, Button, Title, Divider} from 'react-native'; 
+import { StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native'; 
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 import { Audio } from 'expo-av'; 
+import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 
 export default class UserPage extends Component {
 
@@ -15,6 +16,7 @@ export default class UserPage extends Component {
             isAllowedRecord: false,  
             recordingStatus: Audio.RecordingStatus, 
             uri: undefined, 
+            isPlaying: false, 
         };
     }
     componentDidMount() {
@@ -39,6 +41,18 @@ export default class UserPage extends Component {
             alert("Error when trying to access user data."); 
             console.log("Error when trying to access user data in user dashboard."); 
             console.log(e); 
+            return false; 
+        }
+    }
+    logOut = async () => {
+        try {
+            await AsyncStorage.removeItem("username"); 
+            this.props.navigation.navigate('Home'); 
+            return true; 
+        }
+        catch(e){
+            console.log("Error when trying to log out.");
+            console.log(e);
             return false; 
         }
     }
@@ -90,6 +104,35 @@ export default class UserPage extends Component {
             //
         }
     }
+    playRecording = async () => {
+        try {
+
+            console.log("Loading sound..."); 
+            const sound = new Audio.Sound();
+            await sound.loadAsync(this.state.uri);
+
+            console.log("Playing sound...");
+            await sound.playAsync(); 
+            console.log("Sound is playing..."); 
+        }
+        catch(e) {
+            console.log("Error when playing sound");
+            console.log(e); 
+        }
+        /*
+        const sound = await Audio.Sound.createAsync(
+            uri: this.state.uri, 
+        );
+
+        this.setState({
+            player: sound, 
+        });
+
+        console.log("Playing sound"); 
+        await sound.playAsync(); 
+        */ 
+
+    }
     /*
     playRecording = async() => {
         try {
@@ -123,7 +166,8 @@ export default class UserPage extends Component {
                     </View>
                     <View style = {styles.footer}>
                         <View style = {styles.info}>
-                            <Text>Welcome back {this.state.username}!</Text>
+                            <Text style={styles.welcome}>Welcome back {this.state.username}!</Text>
+                            <TouchableOpacity onPress={this.logOut} style={styles.logOutButton}><Text style={styles.logOutText}>Log out</Text></TouchableOpacity>
                         </View>
                         <View style = {styles.exercises}>
                             <Text>Some exercise information here.</Text>
@@ -132,9 +176,9 @@ export default class UserPage extends Component {
                             <Text>Is recording: {this.state.recordingStatus?.isRecording ? "Yes" : "No"}</Text>
                             <Text>Is done recording: {this.state.recordingStatus?.isDoneRecording ? "Yes" : "No"}</Text>
                             <Text>Recording time: {this.state.recordingStatus?.durationMillis / 1000} seconds</Text>
-                            <Button title="start" onPress={this.startRecording}>Start Recording</Button>
-                            <Button title="stop" onPress={this.stopRecording}>Stop Recording</Button>
-                            <Button title="play" /*onPress={this.playRecording}*/>Play Recording</Button>
+                            <TouchableOpacity onPress={this.startRecording} style={styles.exerciseButton}><Text style={styles.exerciseButtonText}>Start Recording</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={this.stopRecording} style={styles.exerciseButton}><Text style={styles.exerciseButtonText}>Stop Recording</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={this.playRecording} style={styles.exerciseButton}><Text style={styles.exerciseButtonText}>Play Recording</Text></TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -171,9 +215,53 @@ const styles = StyleSheet.create({
         height: '80%',
         width: '100%', 
         top: '0%',  
+        backgroundColor: '#AE87D0',
     },
     info: {
         fontFamily: 'Optima',
+    },
+    welcome: {
+        fontSize: 30,
+        fontWeight: 'bold', 
+        textAlign: 'center', 
+        fontFamily: 'Optima',
+    },
+    logOutButton: {
+        width: '25%', 
+        height: '15%',
+        top: '10%',
+        marginLeft: '5%',
+        backgroundColor: '#1f262a',
+        borderRadius: 10,
+    },
+    logOutText: {
         color: '#3499ad',
+        fontWeight: 'bold',
+        fontSize: 15, 
+        textAlign: 'center',
+        overflow: 'hidden', 
+        fontFamily: 'Optima',
+    },
+    exercises: {
+        marginTop: '0%', 
+        marginLeft: '5%', 
+    },
+    exerciseButton: {
+        width: '50%',
+        height: '10%', 
+        marginLeft: '25%',
+        top: '0%',
+        marginTop: '5%',
+        backgroundColor: '#1f262a',
+        borderRadius: 10,
+    },
+    exerciseButtonText: {
+        marginTop: '4%',
+        color: '#3499ad',
+        fontWeight: 'bold',
+        fontSize: 15, 
+        textAlign: 'center',
+        overflow: 'hidden', 
+        fontFamily: 'Optima',
     }
 })

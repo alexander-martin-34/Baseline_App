@@ -76,15 +76,20 @@ export default class RegisterScreen extends Component {
 
         this.props.navigation.navigate('UserPage'); 
     }
+    loginRedirect = () => {
+        this.props.navigation.navigate('LogIn'); 
+    }
 
     render() {
         return (
             <View style = {styles.container}>
                 <View style={styles.header}>
+                    <Text style={styles.headerTitle}>Register</Text>
                     <Text style={styles.headerText}>
-                        Registration
-                        {"\n"}{"\n"}
-                        Registration flavor text here.
+                        Welcome! If you're a patient who is new to this service, please register below. 
+                        If you've already registered in the past, please press the log in button to be 
+                        redirected to our log in page. If you're a therapist, please register on our 
+                        companion website to view your clients' exercise data. 
                         {"\n"}{"\n"}
                         Usernames and passwords can be between 6 and 30 characters long. 
                     </Text>
@@ -109,8 +114,14 @@ export default class RegisterScreen extends Component {
                     >
                         <Text style = {styles.submitText}>Submit</Text>
                     </TouchableOpacity>
-                    {/* test what's saved in username and password */}
-                    <Text>Username: {this.username} {"\n"}Password: {this.password}</Text>
+                    <TouchableOpacity
+                        style = {styles.loginButton}
+                        onPress={() => {
+                            this.loginRedirect(); 
+                        }}
+                    >
+                        <Text style = {styles.loginButtonText}>Log In</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
@@ -129,6 +140,17 @@ const styles = StyleSheet.create({
         width: '100%', 
         top: '0%', 
     }, 
+    headerTitle: {
+        fontFamily: 'Optima',
+        fontSize: 30,
+        marginLeft: '5%',
+        marginRight: '5%', 
+        textAlign: 'center',
+        overflow: 'hidden',
+        fontWeight: 'bold', 
+        color: '#3499ad',
+        top: '20%',
+    },
     headerText: {
         height: '80%', 
         width: '90%',  
@@ -138,7 +160,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Optima',
         color: '#3499ad',
         textAlign: 'center',
-        fontSize: 22, 
+        fontSize: 18, 
         overflow: 'hidden', 
     },
     footer: {
@@ -152,7 +174,7 @@ const styles = StyleSheet.create({
     usernameInput: {
         height: '10%', 
         width: '75%', 
-        marginTop: '0%',
+        marginTop: '10%',
         backgroundColor: 'white', 
         textAlign: 'center', 
     },
@@ -166,7 +188,7 @@ const styles = StyleSheet.create({
     submitButton: {
         height: '10%', 
         width: '75%', 
-        top: 80,
+        top: '10%',
     },
     submitText: {
         fontFamily: 'Optima',
@@ -177,5 +199,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 35, 
         overflow: 'hidden', 
-    }
+    },
+    loginButton: {
+        height: '10%', 
+        width: '75%', 
+        top: '10%',
+    },
+    loginButtonText: {
+        fontFamily: 'Optima',
+        backgroundColor: 'green',
+        color: '#3499ad',
+        borderRadius: 10,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 35, 
+        overflow: 'hidden', 
+    },
 })
