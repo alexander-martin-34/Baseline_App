@@ -102,8 +102,14 @@
     Clayton 4/10/2022: 
     -----------------
 
+    1)
     Cleaned up and tested LogIn.js. It all works as far as I can tell when saving and retrieving username locally in the frontend. Added a To-Do in that file 
     where the backend needs to be called to check the database and see if the inputted and stored password matches. Left a comment in that file with more details.
     Also worked on UserPage.js, figured out how to display the user's username on the page. Needed to figure that out because eventually we'll need to pull 
     exercises from the backend and display them on-screen, but we're not quite ready for that back-end implementation yet. Will update the readme more when more 
     commmits come. 
+    2) 
+    Implemented UserPage sound recording. Still need to implement playback. On my PC, UserPage.js says it has an error, but it doesn't - the error says it 
+    can't read typescript but it definitely is able to when the program is actually run. Idk if it will appear on all PCs but if you see it, don't be alarmed,
+    it runs fine. I'm hoping I can send one more commit by the end of today, but this may be it for me. My next steps will be implementing audio playback on 
+    user page and polishing up the aesthetics of all the current frontend pages. 

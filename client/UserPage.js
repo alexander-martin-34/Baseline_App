@@ -1,9 +1,7 @@
 import React, { Component} from 'react'; 
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native'; 
-import { createStackNavigator, createAppContainer, getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { StyleSheet, Text, View, Button, Title, Divider} from 'react-native'; 
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
-
-// right now I'm trying to get the user page to load in the username from AsyncStorage.
+import { Audio } from 'expo-av'; 
 
 export default class UserPage extends Component {
 
@@ -12,10 +10,16 @@ export default class UserPage extends Component {
         this.state = {
             username: "",
             loaded: false, 
+            recording: Audio.Recording, 
+            player: Audio.Sound,
+            isAllowedRecord: false,  
+            recordingStatus: Audio.RecordingStatus, 
+            uri: undefined, 
         };
     }
     componentDidMount() {
         this.getData(); 
+        this.askForPermissions(); 
         this.setState({
             loaded: true, 
         });
@@ -38,7 +42,73 @@ export default class UserPage extends Component {
             return false; 
         }
     }
+    askForPermissions = async () => {
+        const response = await Audio.requestPermissionsAsync(); 
+        this.setState({
+            isAllowedRecord: response.status,
+        })
+    }
+    startRecording = async () => {
+        if(this.state.recordingStatus?.isRecording){
+            return; 
+        }
+        await Audio.setAudioModeAsync({
+            playsInSilentModeIOS: true, 
+            allowsRecordingIOS: true, 
+        });
 
+        const newRecording = new Audio.Recording(); 
+        this.setState({
+            recording: newRecording, 
+        });
+        await newRecording.prepareToRecordAsync(
+            Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY,
+        );
+
+        newRecording.setOnRecordingStatusUpdate((status: Audio.RecordingStatus) => 
+            this.setState({
+                recordingStatus: status,
+            })
+        );
+
+        await newRecording.startAsync(); 
+    }
+    stopRecording = async () => {
+        if(!this.state.recording){
+            console.log("You are not recording"); 
+            return; 
+        } 
+
+        try {
+            await this.state.recording.stopAndUnloadAsync();
+            this.setState({
+                uri: this.state.recording.getURI(),
+            })
+            console.log("Recorded URI: " + this.state.uri); 
+        }
+        catch (e) {
+            //
+        }
+    }
+    /*
+    playRecording = async() => {
+        try {
+            const sound = await Audio.Sound.createAsync({
+                uri: this.state.uri
+            }, {}, true);
+            this.setState({
+                player: sound, 
+            });
+            console.log("Playing sound..."); 
+            await sound.playAsync(); 
+        }
+        catch(e) {
+            console.log("Error when trying to play recording."); 
+            console.log(e); 
+        }
+    }
+    */
+    
 
     render() { 
 
@@ -57,6 +127,14 @@ export default class UserPage extends Component {
                         </View>
                         <View style = {styles.exercises}>
                             <Text>Some exercise information here.</Text>
+                            <Text>Record Exercise</Text>
+                            <Text>Can record: {this.state.recordingStatus?.canRecord ? "Yes" : "No"}</Text>
+                            <Text>Is recording: {this.state.recordingStatus?.isRecording ? "Yes" : "No"}</Text>
+                            <Text>Is done recording: {this.state.recordingStatus?.isDoneRecording ? "Yes" : "No"}</Text>
+                            <Text>Recording time: {this.state.recordingStatus?.durationMillis / 1000} seconds</Text>
+                            <Button title="start" onPress={this.startRecording}>Start Recording</Button>
+                            <Button title="stop" onPress={this.stopRecording}>Stop Recording</Button>
+                            <Button title="play" /*onPress={this.playRecording}*/>Play Recording</Button>
                         </View>
                     </View>
                 </View>
