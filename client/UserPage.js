@@ -4,6 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av'; 
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 
+// var RNFS = require('react-native-fs'); 
+
 export default class UserPage extends Component {
 
     constructor(props){
@@ -99,7 +101,7 @@ export default class UserPage extends Component {
                 uri: this.state.recording.getURI(),
             })
             console.log("Recorded URI: " + this.state.uri); 
-        }
+            }
         catch (e) {
             //
         }
@@ -109,7 +111,7 @@ export default class UserPage extends Component {
 
             console.log("Loading sound..."); 
             const sound = new Audio.Sound();
-            await sound.loadAsync(this.state.uri);
+            await sound.loadAsync({ uri: this.state.uri });
 
             console.log("Playing sound...");
             await sound.playAsync(); 
@@ -119,38 +121,7 @@ export default class UserPage extends Component {
             console.log("Error when playing sound");
             console.log(e); 
         }
-        /*
-        const sound = await Audio.Sound.createAsync(
-            uri: this.state.uri, 
-        );
-
-        this.setState({
-            player: sound, 
-        });
-
-        console.log("Playing sound"); 
-        await sound.playAsync(); 
-        */ 
-
     }
-    /*
-    playRecording = async() => {
-        try {
-            const sound = await Audio.Sound.createAsync({
-                uri: this.state.uri
-            }, {}, true);
-            this.setState({
-                player: sound, 
-            });
-            console.log("Playing sound..."); 
-            await sound.playAsync(); 
-        }
-        catch(e) {
-            console.log("Error when trying to play recording."); 
-            console.log(e); 
-        }
-    }
-    */
     
 
     render() { 

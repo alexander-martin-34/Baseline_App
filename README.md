@@ -118,6 +118,9 @@
     4/11/2022
     ------------------
 
+    1)
     Cleaned up the front end of all the pages and tried to make them as pretty and presentable as possible, but I'm not an artist in the slightest. 
     Added a log out button on the user page. Added redirects on the log in and registration pages that links them to each other. 
     Still working on playing back recorded audio on the user page. 
+    2) 
+    Finally got the audio playback working. Sound is very quiet, but we'll work on that in a later commit. 
