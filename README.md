@@ -124,3 +124,12 @@
     Still working on playing back recorded audio on the user page. 
     2) 
     Finally got the audio playback working. Sound is very quiet, but we'll work on that in a later commit. 
+    
+    ------------------
+    4/13/2022
+    ------------------
+    
+    Fixed the audio issue in a previous commit. Today's commit was mainly the implementation of a matching game that requires
+    the user to submit an audio recording to play. The idea is that the audio recording would be submitted to the speech therapist
+    once the backend is fully implemented. Probably won't get to that in the scope of this semester's project, but as a demonstration
+    of the larger idea, I think it is effective. 
