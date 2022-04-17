@@ -1,0 +1,51 @@
+{
+  "patient": [
+    {
+      "diagnosis": [
+        "TBI",
+        " Prefrontal Cortex"
+      ],
+      "exercises": [
+        "I need to change this"
+      ],
+      "password": "Test2",
+      "email": "alex@gmail.com",
+      "firstName": "Alexander",
+      "lastName": "Martin",
+      "phone": "9793374688",
+      "address": "42 Wallably Way",
+      "city": "Sydney",
+      "state": "New South Wale",
+      "country": "Australia",
+      "pincode": "200000",
+      "id": 5
+    },
+    {
+      "diagnosis": [
+        "TBI",
+        " Left Motor Cortex"
+      ],
+      "exercises": [
+        "Tongue and Lip exercises",
+        " Match and Identify objects."
+      ],
+      "email": "nicole@studenttester.com",
+      "password": "Test1",
+      "firstName": "Nicole",
+      "lastName": "Rivero",
+      "phone": "9794558348",
+      "address": "12 Nope Blvd",
+      "city": "Nun Ya",
+      "state": "TX",
+      "country": "USA",
+      "pincode": "778331",
+      "id": 6
+    }
+  ],
+  "doctor": [
+    {
+      "email": "doctor@gmail.com",
+      "password": "123123"
+    }
+  ]
+}
